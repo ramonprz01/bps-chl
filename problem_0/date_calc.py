@@ -62,10 +62,8 @@ def date_calc(start, end):
     
     leap_years_between = sum(leap_years_between)
     
-    if leap_years_between == 2:
-        leap_years_between -= 2
-    elif leap_years_between == 1:
-        leap_years_between -=1
+    if leap_years_between >= 2: leap_years_between -= 2
+    elif leap_years_between == 1: leap_years_between -=1
     
     months_in_between = months_to_days2 - months_to_days1
         
