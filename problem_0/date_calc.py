@@ -10,9 +10,9 @@ print()
 print()
 
 print("""You will be asked to add a starting date in the format DD/MM/YYYY,
-then you will be asked to add an end date in the same format as the 
-initial one. Afterwards, the calculator will provide you with the 
-amount of days that have elapsed between your two dates. Please note, 
+then you will be asked to add an end date in the same format as the
+initial one. Afterwards, the calculator will provide you with the
+amount of days that have elapsed between your two dates. Please note,
 the difference between a start and end date without any days in between
 (e.g. 21/12/2000 and 22/12/2000) is 0, meaning this calculator will not
 include the end points of your dates.""")
@@ -114,7 +114,7 @@ def date_calc(start, end):
 # This will keep our while loop running untill we tell it to stop
 activate = True
 
-while activate == True:
+while activate:
     
     # prompts for the user to input the dates of interest
     date1 = input("Please enter a starting date (DD/MM/YYYY): ")

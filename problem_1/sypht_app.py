@@ -78,4 +78,4 @@ row2 = pn.Row(text, pn.Spacer(width=70), file_button_title, width=910, height=25
 
 
 app = pn.Column(title, row2, get_data, background='#3b4252', width=910, height=920, sizing_mode="fixed", align="center")
-app.show()
+app.servable()
