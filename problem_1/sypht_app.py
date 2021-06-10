@@ -7,8 +7,9 @@ from io import BytesIO
 
 pn.extension()
 
-
+######################## Interactive Widget to Upload Invoices ########################
 file = pn.widgets.FileInput(value=None)
+
 
 @pn.depends(file.param.value)
 def get_data(file):
@@ -27,6 +28,7 @@ def get_data(file):
     response = requests.request('POST', url_auth, headers=headers_auth, data=payload_auth, allow_redirects=False)
     token = json.loads(response.text)["access_token"]
     
+    # The function will not be called until a file is uploaded
     if file:
     
         ## Loading Data
@@ -55,27 +57,58 @@ def get_data(file):
 
         return pn.Row(pn.pane.JSON(response_results, max_height=500), the_pic, width=910, height=500, sizing_mode="fixed", align="center")
     
+
     
-    
-header = pn.pane.Markdown("# Document Analyzer App", style={"color": "#3b4252"}, width=500, 
-                          sizing_mode="stretch_width", margin=(10,5,10,15))
+
+
+######################## App Title Row ########################
+
+header = pn.pane.Markdown("# Document Analyzer App", 
+                          style={"color": "#3b4252"}, # title color
+                          width=500, 
+                          sizing_mode="stretch_width", 
+                          margin=(10,5,10,15))
 
 p1 = pn.pane.PNG("https://www.seekpng.com/png/full/265-2650386_clipart-info-cartoon-document.png", 
-                 height=50, sizing_mode="fixed", align="center")
+                 height=50, 
+                 sizing_mode="fixed", 
+                 align="center")
+
 p2 = pn.pane.PNG("https://image.shutterstock.com/image-vector/pile-document-cartoon-vector-illustration-600w-547626148.jpg", 
-                 height=50, sizing_mode="fixed", align="center")
-title = pn.Row(header, pn.Spacer(), p1, p2, background="#d8dee9", sizing_mode='fixed', width=910, height=70)
+                 height=50, 
+                 sizing_mode="fixed", 
+                 align="center")
+
+title = pn.Row(header, pn.Spacer(), p1, p2, 
+               background="#d8dee9", 
+               sizing_mode='fixed', 
+               width=910, 
+               height=70)
+
+######################## App Second Row - Description and Upload BUtton ########################
 
 text = pn.pane.Markdown("""
     This app uses the Sypht API to analyze invoices. It can currently take one at a time, produce a view of the
-    invoice, and return 4 useful pieces of info from it. There is more to come soon.
+    invoice, and return the elements captured by the Sypht API. There is more to come soon.
 
 """, style={"color": "#d8dee9"})
+
 
 file_button_title = pn.Column(pn.pane.Markdown("# Upload an Invoice", style={"color": "#d8dee9"}), file)
 
 row2 = pn.Row(text, pn.Spacer(width=70), file_button_title, width=910, height=250, sizing_mode="fixed", align="center")
 
 
-app = pn.Column(title, row2, get_data, background='#3b4252', width=910, height=920, sizing_mode="fixed", align="center")
+######################## App with all Rows Combined ########################
+# Note that the third row has a callback that depends on an image being uploaded
+# Hence, it will stay hidden until then
+
+app = pn.Column(title, row2, get_data, 
+                background='#3b4252', 
+                width=910, 
+                height=920, 
+                sizing_mode="fixed", 
+                align="center")
+
+# The following method will make sure the app is served when run from the command line
 app.servable()

@@ -25,3 +25,5 @@ panel serve sypht_app.py
 ```
 
 or, you can initialize jupyter lab and run the cells in the notebook called, `sypht_app.ipynb`.
+
+There are 2 examples you can use to test the app in the files folder. Feel free to grab any invoice online to test it.
